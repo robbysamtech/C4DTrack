@@ -20,6 +20,10 @@ import org.traccar.model.Position;
  */
 public final class NotificationSMS {
 
+    public static void main(String[] arg) {
+        sendSMSAsync(0, null, null);
+    }
+
     private NotificationSMS() {
     }
 
@@ -28,9 +32,10 @@ try {
         String postData = "";
         String retval = "";
         String user = "kinjalbshah";
-        String passwd = "temp1234@";
-        String mobileNumber = "9880532398";
-        String message = "care4dear TestSMS-Kinjal";
+        String passwd = "temp1234";
+        String mobileNumber = "+919686055994"; // kinjal
+        //String mobileNumber = "+919448682752"; //kinjal wife
+        String message = "care4dear TestSMS-Kinjal-rob";
         String sid = "JALBSH";
         String mtype = "N";
         String dr = "Y";
