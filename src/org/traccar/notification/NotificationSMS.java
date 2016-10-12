@@ -36,6 +36,8 @@ try {
         String mobileNumber = "+919686055994"; // kinjal
         //String mobileNumber = "+919448682752"; //kinjal wife
         String message = "care4dear TestSMS-Kinjal-rob";
+        message = NotificationFormatter.formatMessage(userId, event, position);
+        System.out.println(message);
         String sid = "JALBSH";
         String mtype = "N";
         String dr = "Y";
