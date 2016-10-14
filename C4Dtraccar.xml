@@ -127,6 +127,10 @@
         WHERE id = :id;
     </entry>
 
+    <entry key='database.selectSOSNumber'>
+        SELECT sosnumber from devices_sos_numbers
+        WHERE uniqueid = :uniqueid;
+    </entry>
     <entry key='database.selectUsersAll'>
         SELECT * FROM users;
     </entry>

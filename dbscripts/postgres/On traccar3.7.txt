@@ -1,0 +1,15 @@
+-- Create devices_sos_numbers table
+
+CREATE TABLE devices_sos_numbers
+(
+  id serial NOT NULL,
+  uniqueid character varying(128) NOT NULL,
+  priority integer NOT NULL,
+  sosnumber character varying(15),
+  CONSTRAINT pk_devices_sos_numbers PRIMARY KEY (uniqueid, priority)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE devices
+  OWNER TO pgc4d;

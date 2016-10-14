@@ -53,6 +53,7 @@ import org.traccar.model.GeofencePermission;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.traccar.model.SOSNumber;
 
 public class DataManager {
 
@@ -313,17 +314,20 @@ public class DataManager {
         }
     }
 
+    public SOSNumber getSOSNumber(String uniqueId) throws SQLException {
+    return QueryBuilder.create(dataSource, getQuery("database.selectSOSNumber"))
+                .setString("uniqueid", uniqueId)
+                .executeQuerySingle(SOSNumber.class);
+    }
     public Server getServer() throws SQLException {
         return QueryBuilder.create(dataSource, getQuery("database.selectServers"))
                 .executeQuerySingle(Server.class);
     }
-
     public void updateServer(Server server) throws SQLException {
         QueryBuilder.create(dataSource, getQuery("database.updateServer"))
                 .setObject(server)
                 .executeUpdate();
     }
-
     public Event getEvent(long eventId) throws SQLException {
         return QueryBuilder.create(dataSource, getQuery("database.selectEvent"))
                 .setLong("id", eventId)

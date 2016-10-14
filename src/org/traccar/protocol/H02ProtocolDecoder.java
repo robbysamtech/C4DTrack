@@ -107,7 +107,8 @@ public class H02ProtocolDecoder extends BaseProtocolDecoder {
         double longitude = readCoordinate(buf, true);
 
         int flags = buf.readUnsignedByte() & 0x0f;
-        position.setValid((flags & 0x02) != 0);
+        //position.setValid((flags & 0x02) != 0);
+        position.setValid(true);
         if ((flags & 0x04) == 0) {
             latitude = -latitude;
         }
@@ -174,7 +175,8 @@ public class H02ProtocolDecoder extends BaseProtocolDecoder {
         }
 
         if (parser.hasNext()) {
-            position.setValid(parser.next().equals("A"));
+           position.setValid(true);
+           parser.next().equals("A");
         }
 
         if (parser.hasNext(2)) {
