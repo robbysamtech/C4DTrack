@@ -59,6 +59,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.InetSocketAddress;
+import org.traccar.api.resource.SOSResource;
 
 public class WebServer {
 
@@ -161,7 +162,7 @@ public class WebServer {
                 GroupResource.class, DeviceResource.class, PositionResource.class,
                 CommandTypeResource.class, EventResource.class, GeofenceResource.class,
                 DeviceGeofenceResource.class, GeofencePermissionResource.class, GroupGeofenceResource.class,
-                NotificationResource.class, ReportResource.class);
+                NotificationResource.class, ReportResource.class, SOSResource.class);
         servletHandler.addServlet(new ServletHolder(new ServletContainer(resourceConfig)), "/*");
 
         handlers.addHandler(servletHandler);

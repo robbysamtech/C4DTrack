@@ -44,7 +44,7 @@ try {
         Device device = Context.getIdentityManager().getDeviceById(event.getDeviceId());
         device.getUniqueId();
         System.out.println(device);
-        SOSNumber sosNumber = Context.getDataManager().getSOSNumber(device.getUniqueId());
+        SOSNumber sosNumber = Context.getDataManager().getSOSNumberForPriority(device.getUniqueId(), "1");
         System.out.println(sosNumber.getSOSNumber());
         String mobileNumber = sosNumber.getSOSNumber();
         String sid = "JALBSH";

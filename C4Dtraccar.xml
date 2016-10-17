@@ -127,10 +127,16 @@
         WHERE id = :id;
     </entry>
 
-    <entry key='database.selectSOSNumber'>
-        SELECT sosnumber from devices_sos_numbers
+    <entry key='database.selectAllSOSNumbers'>
+        SELECT sosnumber, priority from devices_sos_numbers
         WHERE uniqueid = :uniqueid;
     </entry>
+    
+    <entry key='database.selectSOSNumberForPriority'>
+        SELECT sosnumber from devices_sos_numbers
+        WHERE uniqueid = :uniqueid AND priority = :priority;
+    </entry>
+    
     <entry key='database.selectUsersAll'>
         SELECT * FROM users;
     </entry>
