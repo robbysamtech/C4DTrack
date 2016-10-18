@@ -9,7 +9,7 @@ package org.traccar.model;
  *
  * @author Robert
  */
-public class SOSNumberPriority {
+public class SOSNumberInfo {
     private int priority = -1;
     private String sosNumber = null;
     public void setPriority(int priority) {

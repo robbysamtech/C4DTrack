@@ -53,8 +53,7 @@ import org.traccar.model.GeofencePermission;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.traccar.model.SOSNumber;
-import org.traccar.model.SOSNumberPriority;
+import org.traccar.model.SOSNumberInfo;
 
 public class DataManager {
 
@@ -315,16 +314,16 @@ public class DataManager {
         }
     }
 
-    public SOSNumber getSOSNumberForPriority(String uniqueId, String priority) throws SQLException {
+    public Collection<SOSNumberInfo> getSOSNumberForPriority(String uniqueId, int priority) throws SQLException {
     return QueryBuilder.create(dataSource, getQuery("database.selectSOSNumberForPriority"))
                 .setString("uniqueid", uniqueId)
-                .setString("priority", priority)
-                .executeQuerySingle(SOSNumber.class);
+                .setInteger("priority", priority)
+                .executeQuery(SOSNumberInfo.class);
     }
-    public Collection<SOSNumberPriority> getAllSOSNumbers(String uniqueId) throws SQLException {
+    public Collection<SOSNumberInfo> getAllSOSNumbers(String uniqueId) throws SQLException {
     return QueryBuilder.create(dataSource, getQuery("database.selectAllSOSNumbers"))
                 .setString("uniqueid", uniqueId)
-                .executeQuery(SOSNumberPriority.class);
+                .executeQuery(SOSNumberInfo.class);
     }
     public Server getServer() throws SQLException {
         return QueryBuilder.create(dataSource, getQuery("database.selectServers"))

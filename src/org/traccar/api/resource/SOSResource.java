@@ -15,28 +15,23 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import org.traccar.Context;
 import org.traccar.api.BaseResource;
-import org.traccar.model.SOSNumber;
-import org.traccar.model.SOSNumberPriority;
+import org.traccar.model.SOSNumberInfo;
 
 
 
-
+@Path("sosnumberinfo")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 
 public class SOSResource extends BaseResource {
     @GET
-    @Path("sosnumbersforpriority")
-    public SOSNumber getSOSNumberForPriority(
+    public Collection<SOSNumberInfo> getSOSNumberForPriority(
             @QueryParam("uniqueid") long uniqueid, @QueryParam("priority") String priority)
             throws SQLException {
-        return Context.getDataManager().getSOSNumberForPriority("" + uniqueid, "" + priority);
-    }
-    @GET
-    @Path("allsosnumbers")
-    public Collection<SOSNumberPriority> getAllSOSNumbers(
-            @QueryParam("uniqueid") String uniqueid)
-            throws SQLException {
-        return Context.getDataManager().getAllSOSNumbers(uniqueid);
+        if (priority.equals("all")) {
+        return Context.getDataManager().getAllSOSNumbers("" + uniqueid);
+        } else {
+        return Context.getDataManager().getSOSNumberForPriority("" + uniqueid, Integer.parseInt(priority));
+        }
     }
 }

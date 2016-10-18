@@ -11,11 +11,13 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Collection;
+import java.util.Iterator;
 import org.traccar.Context;
 import org.traccar.model.Device;
 import org.traccar.model.Event;
 import org.traccar.model.Position;
-import org.traccar.model.SOSNumber;
+import org.traccar.model.SOSNumberInfo;
 
 /**
  *
@@ -40,13 +42,20 @@ try {
         //String mobileNumber = "+919448682752"; //kinjal wife
         String message = "care4dear TestSMS-Kinjal-rob";
         message = NotificationFormatter.formatMessage(userId, event, position);
-        System.out.println(message);
         Device device = Context.getIdentityManager().getDeviceById(event.getDeviceId());
-        device.getUniqueId();
-        System.out.println(device);
-        SOSNumber sosNumber = Context.getDataManager().getSOSNumberForPriority(device.getUniqueId(), "1");
-        System.out.println(sosNumber.getSOSNumber());
-        String mobileNumber = sosNumber.getSOSNumber();
+        Collection<SOSNumberInfo> sosNumberInfoList
+                = Context.getDataManager().getSOSNumberForPriority(device.getUniqueId(), 1);
+        SOSNumberInfo sosNumberInfo = null;
+        if (sosNumberInfoList.size() > 0) {
+            Iterator<SOSNumberInfo> iterator = sosNumberInfoList.iterator();
+            iterator.hasNext();
+            sosNumberInfo = iterator.next();
+        }
+        if (sosNumberInfo == null) {
+         throw new Exception("No matching number found for " + device.getUniqueId());
+        }
+        System.out.println(sosNumberInfo.getSOSNumber());
+        String mobileNumber = sosNumberInfo.getSOSNumber();
         String sid = "JALBSH";
         String mtype = "N";
         String dr = "Y";
