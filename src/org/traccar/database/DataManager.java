@@ -208,6 +208,11 @@ public class DataManager {
                 .setObject(device)
                 .executeUpdate());
     }
+    public void addSOSNumberInfo(SOSNumberInfo sosNumberInfo) throws SQLException {
+        QueryBuilder.create(dataSource, getQuery("database.insertSOSNumberInfo"))
+                .setObject(sosNumberInfo)
+                .executeUpdate();
+    }
 
     public void updateDevice(Device device) throws SQLException {
         QueryBuilder.create(dataSource, getQuery("database.updateDevice"))

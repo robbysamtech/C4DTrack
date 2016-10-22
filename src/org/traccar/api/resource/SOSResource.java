@@ -9,10 +9,12 @@ import java.sql.SQLException;
 import java.util.Collection;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import org.traccar.Context;
 import org.traccar.api.BaseResource;
 import org.traccar.model.SOSNumberInfo;
@@ -25,7 +27,7 @@ import org.traccar.model.SOSNumberInfo;
 
 public class SOSResource extends BaseResource {
     @GET
-    public Collection<SOSNumberInfo> getSOSNumberForPriority(
+    public Collection<SOSNumberInfo> get(
             @QueryParam("uniqueid") long uniqueid, @QueryParam("priority") String priority)
             throws SQLException {
         if (priority.equals("all")) {
@@ -33,5 +35,11 @@ public class SOSResource extends BaseResource {
         } else {
         return Context.getDataManager().getSOSNumberForPriority("" + uniqueid, Integer.parseInt(priority));
         }
+    }
+    @POST
+    public Response add(SOSNumberInfo sosNumberInfo) throws SQLException {
+        Context.getPermissionsManager().checkReadonly(getUserId());
+        Context.getDataManager().addSOSNumberInfo(sosNumberInfo);
+        return Response.ok(sosNumberInfo).build();
     }
 }

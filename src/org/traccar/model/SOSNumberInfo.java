@@ -12,6 +12,7 @@ package org.traccar.model;
 public class SOSNumberInfo {
     private int priority = -1;
     private String sosNumber = null;
+    private String uniqueId = null;
     public void setPriority(int priority) {
         this.priority = priority;
     }
@@ -23,5 +24,11 @@ public class SOSNumberInfo {
     }
     public String getSOSNumber() {
         return sosNumber;
+    }
+    public void setUniqueId(String uniqueId) {
+        this.uniqueId = uniqueId;
+    }
+    public String getUniqueId() {
+        return uniqueId;
     }
 }

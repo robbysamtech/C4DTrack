@@ -127,13 +127,18 @@
         WHERE id = :id;
     </entry>
 
+    <entry key='database.insertSOSNumberInfo'>
+        INSERT INTO devices_sos_numbers (uniqueId, priority, sosnumber) VALUES (:uniqueId, :priority, :sosNumber);
+    </entry>
+
+
     <entry key='database.selectAllSOSNumbers'>
-        SELECT sosnumber, priority from devices_sos_numbers
+        SELECT sosnumber, priority, uniqueid from devices_sos_numbers
         WHERE uniqueid = :uniqueid;
     </entry>
     
     <entry key='database.selectSOSNumberForPriority'>
-        SELECT sosnumber from devices_sos_numbers
+        SELECT sosnumber, priority, uniqueid from devices_sos_numbers
         WHERE uniqueid = :uniqueid AND priority = :priority;
     </entry>
     
